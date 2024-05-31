@@ -2,6 +2,7 @@ package com.pluralsight.UserInterface;
 import com.pluralsight.Models.Chip;
 import com.pluralsight.Models.Drink;
 import com.pluralsight.Models.Sandwich;
+import com.pluralsight.TransactionManager.TransactionsFileManager;
 
 import java.util.*;
 
@@ -227,6 +228,8 @@ public class CheckOut
 
             //Add sandwich in a arrayList
             sandwiches.add(sandwich);
+            double totalPrice = sandwiches.stream().mapToDouble(Sandwich::calculateTotalPrice).sum();
+            System.out.println("Total price for sandwiches: $" + totalPrice);
 
             //Asking user if they would like to add another sandwich
 
@@ -275,11 +278,11 @@ public class CheckOut
 
             //Asking user for drink size
             System.out.println("Choose your drink size: ");
-            int index = 1;
+            int sizeIndex = 1;
             for (String size: Drink.getDrinkPrices().keySet())
             {
-                System.out.println(index + "." + size);
-                index++;
+                System.out.println(sizeIndex + "." + size);
+                sizeIndex++;
             }
             System.out.print("Enter the size of your choice: ");
             int sizeChoice = Integer.parseInt(CheckOut.userInput.nextLine());
@@ -290,17 +293,20 @@ public class CheckOut
             }
 
             String size = null;
-
+            sizeIndex = 1;
             for (String key : Drink.getDrinkPrices().keySet()) {
-                if (index == sizeChoice) {
+                if (sizeIndex == sizeChoice) {
                     size = key;
                     break;
                 }
-                index++;
+                sizeIndex++;
             }
 
             Drink newDrink = new Drink(selectedFlavor, size);
             drinks.add(newDrink);
+
+            double totalPrice = drinks.stream().mapToDouble(Drink::calculateTotalPrice).sum();
+            System.out.println("Total Price for drinks: $" +totalPrice);
 
             System.out.print("Do you want to add another drink? (yes/no): ");
             String addAnotherChoice = CheckOut.userInput.nextLine().toLowerCase();
@@ -349,6 +355,9 @@ public class CheckOut
             Chip newchip = new Chip(selectedFlavor);
             chips.add(newchip);
 
+            double totalPrice = chips.stream().mapToDouble(Chip::calculateTotalPrice).sum();
+            System.out.println("Total price for chips: $" +totalPrice);
+
             // Asking user if they would like to add another chip
             System.out.print("Do you want to add another chip? (yes/no): ");
             String addAnotherChoice = userInput.nextLine().toLowerCase();
@@ -371,7 +380,7 @@ public class CheckOut
         order.setDrinks(drinks);
         order.setChips(chips);
         //displaying the receipt/order details
-        order.generateReceipt(new Date(),sandwiches,drinks,chips);
+        TransactionsFileManager.generateReceipt(new Date(),sandwiches,drinks,chips);
 
         //will ask user if they want it and confirm it or if not it will be cancelled
         System.out.print("Would you like to confirm the order? (yes/no): ");
