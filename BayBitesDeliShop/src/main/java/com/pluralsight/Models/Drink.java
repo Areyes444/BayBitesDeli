@@ -7,17 +7,43 @@ import java.util.Map;
 
 public class Drink extends Product
 {
-    private String drinkFlavor;
+    private List<String> drinkFlavors;
     private String size;
 
-    public Drink(String nameOfProduct, String drinkFlavor, String size)
+    public Drink(String flavor, String size)
     {
-        super(nameOfProduct, 0);
-        this.drinkFlavor = drinkFlavor;
+        super( 0);
+        drinkFlavors = new ArrayList<>();
+        drinkFlavors.add("Sprite");
+        drinkFlavors.add("Fresh Lemonade");
+        drinkFlavors.add("Fresh Ice Tea");
+        drinkFlavors.add("Green Tea");
+        drinkFlavors.add("Root Beer");
+        drinkFlavors.add("Kombucha");
+        drinkFlavors.add("Coconut Water");
+
         this.size = size;
     }
 
+    public List<String> getDrinkFlavors()
+    {
+        return drinkFlavors;
+    }
 
+    public void addDrinkFlavor(String drinkFlavor)
+    {
+        drinkFlavors.add(drinkFlavor);
+    }
+
+    public String getSize()
+    {
+        return size;
+    }
+
+    public void setSize(String size)
+    {
+        this.size = size;
+    }
 
 
     private static final Map<String, Double> drinkPrices = new HashMap<>();
@@ -28,9 +54,10 @@ public class Drink extends Product
         drinkPrices.put("Large", 3.00);
     }
 
-
-
-
+    public static Map<String, Double> getDrinkPrices()
+    {
+        return drinkPrices;
+    }
 
     @Override
     public double calculateTotalPrice()

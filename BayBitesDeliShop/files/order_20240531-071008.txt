@@ -1,0 +1,7 @@
+Deli Shop: Bay Bites Deli Shop
+Order Time: Fri May 31 07:10:08 PDT 2024
+------------ Ordered Items ----------
+Sandwich: null,3.5
+Drink: null,3.0
+Chip: null,1.5
+Total Order Price: 8.0

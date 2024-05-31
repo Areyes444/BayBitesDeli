@@ -1,0 +1,4 @@
+Deli Shop: Bay Bites Deli Shop/nOrder Time: Fri May 31 05:15:30 PDT 2024/n------------ Ordered Items ----------/nDrink: null,0.0
+Chip: Sun chips,1.5
+Chip: Sour cream and onion chips,1.5
+Total Order Price: 3.0/n

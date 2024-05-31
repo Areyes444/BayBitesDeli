@@ -6,9 +6,9 @@ public abstract class Product
     private double basePrice;
 
 
-    public Product(String nameOfProduct, double basePrice)
+    public Product( double basePrice)
     {
-        this.nameOfProduct = nameOfProduct;
+
         this.basePrice = basePrice;
 
 

@@ -15,21 +15,87 @@ public class Sandwich extends Product
     private boolean extraCheese;
     private List<String> toppings;
     private List<String> sauces;
+    private boolean toasted;
     private List<String> sides;
 
-    public Sandwich(String nameOfProduct, int sandwichSize, boolean extraMeats, boolean extraCheese)
+    public Sandwich( int sandwichSize, List<String> breadTypes, List<String> meatTypes, boolean extraMeats,
+                     List<String> cheeseTypes, boolean extraCheese, List<String> toppings, List<String> sauces,
+                     boolean toasted, List<String> sides)
     {
-        super(nameOfProduct,0);
+        super(0);
         this.sandwichSize = sandwichSize;
+
+        //created the breads,meats, cheese, toppings, sauce and sides array just to call to checkout class
         this.breadTypes = new ArrayList<>();
+        this.breadTypes.add("White bread");
+        this.breadTypes.add("Wheat bread");
+        this.breadTypes.add("Rye bread");
+        this.breadTypes.add("Multigrain bread");
+        this.breadTypes.add("Wrap");
+
         this.meatTypes = new ArrayList<>();
+        this.meatTypes.add("Steak");
+        this.meatTypes.add("Ham");
+        this.meatTypes.add("Salami");
+        this.meatTypes.add("Roast beef");
+        this.meatTypes.add("Chicken");
+        this.meatTypes.add("Bacon");
+        this.meatTypes.add("Tofu");
+
         this.cheeseTypes = new ArrayList<>();
+        this.cheeseTypes.add("American");
+        this.cheeseTypes.add("Provolone");
+        this.cheeseTypes.add("Cheddar");
+        this.cheeseTypes.add("Swiss");
+        this.cheeseTypes.add("Plant Based");
+
         this.extraMeats = extraMeats;
         this.extraCheese = extraCheese;
-        //creating arrays of toppings, sauces, and sides since they are included and no need to calculate
+        this.toasted = toasted;
+
         this.toppings = new ArrayList<>();
+        this.toppings.add("Lettuce");
+        this.toppings.add("Peppers");
+        this.toppings.add("Onions");
+        this.toppings.add("Tomatoes");
+        this.toppings.add("Jalapenos");
+        this.toppings.add("Cucumbers");
+        this.toppings.add("Pickles");
+        this.toppings.add("Guacamole");
+        this.toppings.add("Mushrooms");
+
         this.sauces = new ArrayList<>();
+        this.sauces.add("Mayo");
+        this.sauces.add("Mustard");
+        this.sauces.add("Ketchup");
+        this.sauces.add("Ranch");
+        this.sauces.add("Thousand Islands");
+        this.sauces.add("Vinaigrette");
+        this.sauces.add("BBQ");
+
         this.sides = new ArrayList<>();
+        this.sides.add("Au Jus");
+        this.sides.add("Sauce");
+        this.sides.add("Napkins");
+        this.sides.add("Utensils");
+    }
+
+    public int getSandwichSize()
+    {
+        return sandwichSize;
+    }
+
+    public void setSandwichSize(int sandwichSize)
+    {
+        this.sandwichSize = sandwichSize;
+    }
+
+    public boolean isToasted() {
+        return toasted;
+    }
+
+    public void setToasted(boolean toasted) {
+        this.toasted = toasted;
     }
 
     public boolean isExtraCheese()
@@ -146,15 +212,34 @@ public class Sandwich extends Product
     {   //setting the total price to 0.00
         double totalPrice = 0.0;
         //getting the baseprice without no extra meat or cheesee
-        double baseMeatPrice = meatBasePrices.getOrDefault(sandwichSize, 0.00);
-        double baseCheesePrice = cheeseBasePrices.getOrDefault(sandwichSize, 0.00);
+        double baseMeatPrice = getBaseMeatPrice(sandwichSize);
+        double baseCheesePrice = getBaseCheesePrice(sandwichSize);
         totalPrice += baseMeatPrice + baseCheesePrice;
 
         //with extra meat and cheese total the += adding everything from right and equaling
-        totalPrice += extraCheese ?  extraCheesePrices.get(sandwichSize) : 0.0;
-        totalPrice += extraMeats ? extraMeatPrices.get(sandwichSize) : 0.00;
+        totalPrice += extraCheese ?  getExtraCheesePrice(sandwichSize) : 0.0;
+        totalPrice += extraMeats ? getExtraMeatPrice(sandwichSize) : 0.00;
 
         return totalPrice;
 
+    }
+    private double getBaseMeatPrice(int size) {
+        return getBasePrice(size, meatBasePrices);
+    }
+
+    private double getBaseCheesePrice(int size) {
+        return getBasePrice(size, cheeseBasePrices);
+    }
+
+    private double getExtraMeatPrice(int size) {
+        return getBasePrice(size, extraMeatPrices);
+    }
+
+    private double getExtraCheesePrice(int size) {
+        return getBasePrice(size, extraCheesePrices);
+    }
+
+    private double getBasePrice(int size, Map<Integer, Double> priceMap) {
+        return priceMap.getOrDefault(size, 0.0);
     }
 }
