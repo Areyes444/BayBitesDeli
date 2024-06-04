@@ -16,8 +16,6 @@ UML for each Package From the UserInterface, Models, and for the Transactions
 
 When the Cashier enters "1" they are able to start adding the customer's order
 
-0) Exit the Application
-
 When the Cashier enters "0" they are able to Exit the Application
 
 ![Home Screen(Deli WorkShop)](https://github.com/Areyes444/BayBitesDeli/assets/166452594/d88f9443-c92f-49f6-9f07-8e275ef571d7)
