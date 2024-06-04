@@ -1,0 +1,13 @@
+---------- YOUR ORDER ---------
+Deli Shop: Bay Bites Deli Shop
+Order Time: 20240531-135230
+---------- Order Summary ----------
+Sandwich: 5.1
+Sandwich: 5.25
+Drink: 2.5
+Drink: 2.0
+Chip: 1.5
+Chip: 1.5
+Total Sandwich Price: 10.35
+Total Drink Price: 4.5
+Total Chip price: 3.0

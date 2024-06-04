@@ -18,7 +18,7 @@ public class TransactionsFileManager
         // Saving the CSV file with time stamp information
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String timeStampString = dateFormat.format(orderTimeStamp);
-        String fileName = "files" + timeStampString + ".txt";
+        String fileName = "files/" + timeStampString + ".txt";
 
         try {
             // Create the directory if it doesn't exist
